@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  form(action="/users/signup" method="POST" class="form-control")
+    h1= title
+    div(class="form-group")
+      label(for="firstName") First Name
+      input(type="text" name="first_name")
+    div(class="form-group")
+      label(for="lastName") Last Name
+      input(type="text" name="last_name")
+    div(class="form-group")
+      label(for="email") Email
+      input(type="text" name="email")
+    div(class="form-group")
+      label(for="password") Password
+      input(type="text" name="password")
+    button(type="submit" class="button") Sign Up!
