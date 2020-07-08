@@ -2,12 +2,15 @@ extends layout
 
 block content
   form(action="" method="POST" class="form-control")
-    h1= title
+    h1(class="title")= title
+    if error
+      h2(class="errors")= error.message
     div(class="form-group")
       label(for="email") Email
-      input(type="text" name="username")
+      input(type="text" name="email")
     div(class="form-group")
       label(for="password") Password
       input(type="text" name="password")
-    a(href="/users/signup") Not a member yet? Sign Up!
-    button(type="submit" class="button") Log In
+    div(class="form-group")  
+      a(href="/users/signup") Not a member yet? Sign Up!
+      button(type="submit" class="button") Log In

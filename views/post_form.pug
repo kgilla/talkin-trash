@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  form(action="/posts/create" method="POST" class="form-control")
+    h1(class="title")= title
+    h1= currentUser.firstName
+    div(class="form-group")
+      label(for="title") Title
+      input(type="text" name="title")
+    div(class="form-group")
+      label(for="content") Content
+      textarea(cols="30", rows="10" name="content")
+    div(class="form-group")  
+      button(type="submit" class="button") Create Post

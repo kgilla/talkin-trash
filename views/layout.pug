@@ -6,4 +6,19 @@ html
     link(rel='stylesheet', href='/stylesheets/reset.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header(class="main-header")
+      h1(class="main-title") Talkin' Trash
+      nav(class="main-nav")
+        div(class="left-links")
+          if currentUser
+            a(href="" class="nav-link") All Posts
+            a(href="/posts/create" class="nav-link")  New Post
+        div(class="right-links")
+          if currentUser
+            a(href="/users/logout" class="nav-link") Logout
+            a(href=currentUser.url class="nav-link") #{currentUser.firstName} Profile
+          else
+            a(href="/users/signup" class="nav-link") Sign Up
+            a(href="/users/login" class="nav-link") Log In
+    div(class="content")
+      block content

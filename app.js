@@ -5,9 +5,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcryptjs");
+
+// Env config
 require("dotenv").config();
+
+// Passport Config
+require("./config/passport")(passport);
 
 var app = express();
 
@@ -27,39 +30,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// Passport Config
-const User = require("./models/user");
-
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ email: username }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { msg: "Incorrect email" });
-      }
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
-          return done(null, user);
-        } else {
-          return done(null, false, { msg: "Incorrect password" });
-        }
-      });
-    });
-  })
-);
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
-
 // Sessions
 app.use(
   session({
@@ -72,6 +42,12 @@ app.use(
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Currentuser middleware
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());

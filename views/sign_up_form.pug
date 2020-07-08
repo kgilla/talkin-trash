@@ -2,7 +2,7 @@ extends layout
 
 block content
   form(action="/users/signup" method="POST" class="form-control")
-    h1= title
+    h1(class="title")= title
     div(class="form-group")
       label(for="firstName") First Name
       input(type="text" name="first_name")
@@ -15,4 +15,5 @@ block content
     div(class="form-group")
       label(for="password") Password
       input(type="text" name="password")
-    button(type="submit" class="button") Sign Up!
+    div(class="form-group")  
+      button(type="submit" class="button") Sign Up!
