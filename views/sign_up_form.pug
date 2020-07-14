@@ -1,19 +1,28 @@
 extends layout
 
 block content
-  form(action="/users/signup" method="POST" class="form-control")
-    h1(class="title")= title
-    div(class="form-group")
-      label(for="firstName") First Name
-      input(type="text" name="first_name")
-    div(class="form-group")
-      label(for="lastName") Last Name
-      input(type="text" name="last_name")
-    div(class="form-group")
-      label(for="email") Email
-      input(type="text" name="email")
-    div(class="form-group")
-      label(for="password") Password
-      input(type="text" name="password")
-    div(class="form-group")  
-      button(type="submit" class="button") Sign Up!
+  div(class="form-box")
+    div(class="form-info")
+      h1(class="info-title") Connect with random strangers 
+      h1(class="info-title") and talk some trash!
+      ul(class="info-list")
+        li(class="info-list-item") Sign up and create an account 
+        li(class="info-list-item") Apply for membership
+        li(class="info-list-item") See who's been talking about you!
+    form(action="/users/signup" method="POST" class="form-control")
+      h2(class="title")= title
+      p(class="sub-title") It's quick and easy.
+      div(class="form-group")
+        label(for="firstName") First Name
+        input(type="text" name="first_name")
+      div(class="form-group")
+        label(for="lastName") Last Name
+        input(type="text" name="last_name")
+      div(class="form-group")
+        label(for="email") Email
+        input(type="text" name="email")
+      div(class="form-group")
+        label(for="password") Password
+        input(type="text" name="password")
+      div(class="form-group")  
+        button(type="submit" class="button") Sign Up!

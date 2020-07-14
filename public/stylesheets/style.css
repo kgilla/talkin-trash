@@ -4,80 +4,144 @@ html {
   font-size: 16px;
 }
 
+* {
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
 body {
   font-family: "Roboto", sans-serif;
+  background: #edf0f5;
+  color: #222;
 }
 
 a {
   color: #00b7ff;
 }
 
+.sub-header {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .content {
-  margin: 3rem 10rem;
 }
 
 /* Main Nav */
-
-.main-header {
+.main-nav {
   display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid black;
-  background: #d32f2f;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 10rem;
+  background: #20232a;
 }
 
 .main-title {
   padding: 1rem;
   text-align: center;
   font-size: 2rem;
-  color: #fff;
-}
-
-.main-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 5rem;
-  background: #e53935;
-}
-
-.left-links {
-}
-
-.right-links {
+  color: #ff6633;
+  text-decoration: none;
 }
 
 .nav-link {
-  padding: 1rem;
-  color: #fff;
+  padding: 0.5rem 1rem;
+  color: #f4f4f5;
   text-decoration: none;
   font-size: 1.2rem;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.main-title:hover {
+  filter: brightness(90%);
+  text-decoration: underline;
+}
+
+/* welcome mat */
+
+.welcome-mat {
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #282c34;
+}
+
+.welcome-mat h1 {
+  padding: 1rem;
+  font-size: 2rem;
+  color: #ff6633;
+  font-weight: bolder;
+}
+
+.welcome-mat h2 {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.welcome-mat a {
+  padding: 1rem;
+  color: #000;
+  background: #ff6633;
+  border: 0.1rem solid #333;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.welcome-mat a:hover {
   filter: brightness(90%);
 }
 
 /* forms */
+
+.form-box {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3rem auto;
+}
 
 form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 1rem;
-  border: 1px solid #aaa;
+  width: 40%;
+  padding: 2rem;
+  border: 0.1rem solid #aaa;
   border-radius: 0.5rem;
+  background: #fff;
 }
 
 .title {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.info-title {
+  font-size: 2rem;
+}
+
+.info-list {
+  padding: 1rem;
+}
+
+.info-list-item {
+  font-size: 1.5rem;
+  margin-top: 3rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  padding: 1rem;
+  width: 100%;
+  padding: 0.5rem;
 }
 
 form label {
@@ -86,11 +150,19 @@ form label {
 }
 
 form input {
+  margin: 0 auto;
   width: 100%;
   font-size: 1rem;
-  border: 1px solid #aaa;
-  border-radius: 0.5rem;
+  border: 0.1rem solid #aaa;
   padding: 0.5rem;
+}
+
+form textarea {
+  width: 100%;
+  height: 10rem;
+  resize: none;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
 }
 
 form input:focus {
@@ -99,11 +171,77 @@ form input:focus {
 
 form button {
   width: 100%;
-  border: 1px solid #aaa;
+  border: 0.1rem solid #aaa;
   border-radius: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.5rem;
   background: #388e3c;
   color: #fff;
   font-size: 1rem;
+}
+
+.not-user {
+  padding: 0 0.5rem;
+}
+
+/* post stuff */
+
+.new-post {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 2rem 0.5rem;
+  border: 0.1rem solid #aaa;
+  border-radius: 50%;
+  background: #388e3c;
+  color: #fff;
+  text-decoration: none;
+}
+
+.post-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  padding: 2rem 10rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.post-header {
+  padding: 0.5rem;
+  background: #20232a;
+}
+
+.post-author {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.post-body {
+  padding: 0.5rem;
+}
+
+.post-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.post-content {
+  font-size: 1rem;
+}
+
+.post-footer {
+  padding: 0.5rem;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  font-style: italic;
 }

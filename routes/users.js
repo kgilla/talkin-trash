@@ -12,6 +12,6 @@ router.post("/signup", userController.signupPost);
 // router.get("/:id/update", userController.userUpdateGet);
 // router.post("/:id/update", userController.userUpdatePost);
 router.get("/:id", userController.userDetail);
-// router.get("/", userController.userIndex);
+router.get("/", userController.userIndex);
 
 module.exports = router;
