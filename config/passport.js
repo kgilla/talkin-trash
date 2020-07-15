@@ -15,13 +15,13 @@ module.exports = function (passport) {
             return done(err);
           }
           if (!user) {
-            return done(null, false, { msg: "Incorrect email" });
+            return done(null, false, { message: "Incorrect email" });
           }
           bcrypt.compare(password, user.password, (err, res) => {
             if (res) {
               return done(null, user);
             } else {
-              return done(null, false, { msg: "Incorrect password" });
+              return done(null, false, { message: "Incorrect password" });
             }
           });
         });

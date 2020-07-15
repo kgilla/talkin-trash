@@ -1,13 +1,11 @@
 const Post = require("../models/post");
 const User = require("../models/user");
-const passport = require("passport");
-const bcrypt = require("bcryptjs");
-const { render } = require("pug");
 
 exports.createGet = (req, res) => {
   if (req.user) {
     res.render("post_form", { title: "Create Post" });
   } else {
+    req.flash("error", "Please Log In");
     res.redirect("/users/login");
   }
 };
@@ -21,17 +19,7 @@ exports.createPost = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/posts/");
+    req.flash("success", "Post Created!");
+    res.redirect("/");
   });
-};
-
-exports.index = async (req, res, next) => {
-  await Post.find()
-    .populate("author")
-    .exec((err, posts) => {
-      if (err) {
-        next(err);
-      }
-      res.render("post_index", { posts: posts });
-    });
 };

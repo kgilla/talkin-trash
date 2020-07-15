@@ -113,7 +113,7 @@ form {
   justify-content: space-evenly;
   align-items: center;
   width: 40%;
-  padding: 2rem;
+  padding: 1rem;
   border: 0.1rem solid #aaa;
   border-radius: 0.5rem;
   background: #fff;
@@ -121,7 +121,7 @@ form {
 
 .title {
   font-size: 1.5rem;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .info-title {
@@ -244,4 +244,23 @@ form button {
 .post-date {
   font-size: 0.8rem;
   font-style: italic;
+}
+
+/* Error stuff */
+
+.error,
+.success {
+  font-size: 1rem;
+  width: 90%;
+  padding: 1rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.error {
+  background: #ef9a9a;
+}
+
+.success {
+  background: #a5d6a7;
 }

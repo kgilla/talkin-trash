@@ -9,6 +9,5 @@ router.post("/create", postController.createPost);
 // router.get("/:id/update", postController.postUpdateGet);
 // router.post("/:id/update", postController.postUpdatePost);
 // router.get("/:id", postController.detail);
-router.get("/", postController.index);
 
 module.exports = router;

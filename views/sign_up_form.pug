@@ -11,18 +11,23 @@ block content
         li(class="info-list-item") See who's been talking about you!
     form(action="/users/signup" method="POST" class="form-control")
       h2(class="title")= title
-      p(class="sub-title") It's quick and easy.
+      if errors 
+        for error in errors
+          p(class="error")= error 
       div(class="form-group")
         label(for="firstName") First Name
-        input(type="text" name="first_name")
+        input(type="text" name="first_name" placeholder="First Name" required="true" value= first_name ? first_name : "")
       div(class="form-group")
         label(for="lastName") Last Name
-        input(type="text" name="last_name")
+        input(type="text" name="last_name" placeholder="Last Name" required="true" value= last_name ? last_name : "")
       div(class="form-group")
         label(for="email") Email
-        input(type="text" name="email")
+        input(type="text" name="email" placeholder="Your Email" required="true" value= email ? email : "")
       div(class="form-group")
         label(for="password") Password
-        input(type="text" name="password")
+        input(type="text" name="password" placeholder="Password" required="true")
+      div(class="form-group")
+        label(for="password2") Confirm Password
+        input(type="text" name="password2" placeholder="Confirm Password" required="true")
       div(class="form-group")  
         button(type="submit" class="button") Sign Up!

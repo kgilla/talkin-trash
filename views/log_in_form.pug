@@ -4,8 +4,8 @@ block content
   div(class="form-box")
     form(action="" method="POST" class="form-control")
       h1(class="title")= title
-      if error
-        h2(class="errors")= error.message
+      if message != ""
+        p(class="error")= message
       div(class="form-group")
         label(for="email") Email
         input(type="text" name="email")
