@@ -1,34 +1,43 @@
 extends layout
 
 block content
-  if message
-    h1(class="success")= message
+  if success != ""
+    h2(class="success")= success
   if currentUser
-    h2 Welcome back #{currentUser.name}!
     div(class="post-box")
+      h2(class="sub-header") Most Recent Posts
       each post in posts
         div(class="post-card")
           div(class="post-header")
-            h2(class="post-author") #{post.author.name}
+            if post.author.id == currentUser.id
+              h2(class="post-author") Posted by You on #{post.niceDate}
+            else 
+              h2(class="post-author") Posted by #{post.author.name} on #{post.niceDate}
           div(class="post-body")
             h2(class="post-title")= post.title
             p(class="post-content")= post.content
           div(class="post-footer")
-            p(class="post-date")= post.niceDate
-    a(href="/posts/create" class="new-post")  New Post
+            if post.author.id == currentUser.id
+              a(href=post.url + "/update" class="update-post") Update 
+              a(href="" class="delete-post") Delete
+              if post.updated
+                h2 Last updated on #{post.niceUpdated}
+      a(href="posts/create" class="new-post") New Post +
   else
     div(class="welcome-mat")
-      h1 Talkin' Trash
-      h2 People are always talking, maybe even about you!
-      a(href="/users/signup") Sign Up
-    h2(class="sub-header") Here's what members have been saying!
-    div(class="post-box")
-      each post in posts
+      h1(class="welcome-heading") Talkin' Trash
+      h2(class="welcome-sub-heading") People are always talking, maybe even about you!
+      a(href="/users/signup" class="welcome-button") Sign Up
+    h2(class="sub-header") Here's what some members have been saying!
+    div(class="post-box") 
+      each post in smallPosts
         div(class="post-card")
           div(class="post-header")
-            h2(class="post-author") ????
+            h2(class="post-author") Posted by ???? on ????
           div(class="post-body")
             h2(class="post-title")= post.title
             p(class="post-content")= post.content
-          div(class="post-footer")
-            p(class="post-date")= post.niceDate
+    div(class="welcome-footer")
+      h2(class="welcome-sub-heading") Become a part of something and start talkin' some trash!
+      a(href="/users/signup" class="welcome-button") Sign Up
+

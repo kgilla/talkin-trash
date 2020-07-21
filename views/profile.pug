@@ -2,5 +2,29 @@ extends layout
 
 block content
   div(class="profile-box")
+    h2 #{currentUser.name}'s Profile
+    a(href="") Change Email
+    a(href="") Change Name
+    a(href="") Change Password
+    a(href="") Upgrade Membership
+    if posts
+      div(class="post-box")
+        each post in posts
+          div(class="post-card")
+            div(class="post-header")
+              h2(class="post-author") Posted by You on #{post.niceDate}
+            div(class="post-body")
+              h2(class="post-title")= post.title
+              p(class="post-content")= post.content
+            div(class="post-footer")
+              a(href=post.url + "/update" class="update-post") Update 
+              a(href="" class="delete-post") Delete
+      a(href="/posts/create" class="new-post") New Post +
+    else 
+      h2 No Posts Yet
+      a(href="/posts/create") Create New Post
+
+
+
       
   

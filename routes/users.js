@@ -7,6 +7,8 @@ router.post("/login", userController.loginPost);
 router.get("/logout", userController.logout);
 router.get("/signup", userController.signupGet);
 router.post("/signup", userController.signupPost);
+router.get("/:id/membership", userController.membershipGet);
+router.post("/:id/membership", userController.membershipPost);
 // router.get("/membership", userController.membershipGet);
 // router.post("/membership", userController.membershipPost);
 // router.get("/:id/delete", userController.userDeleteGet);

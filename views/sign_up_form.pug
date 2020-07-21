@@ -12,8 +12,8 @@ block content
     form(action="/users/signup" method="POST" class="form-control")
       h2(class="title")= title
       if errors 
-        for error in errors
-          p(class="error")= error 
+        each error in errors
+          p(class="error")= error.msg 
       div(class="form-group")
         label(for="firstName") First Name
         input(type="text" name="first_name" placeholder="First Name" required="true" value= first_name ? first_name : "")

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div(class="form-box")
+    form(action=currentUser.url + "/membership" method="POST" class="form-control")
+      h1(class="title")= title
+      if errors 
+        each error in errors
+          p(class="error")= error.msg 
+      if error
+        p(class="error")= error
+      if success
+        p(class="success")= success
+      if currentUser.isMember == false 
+        h2 You not currently a full member
+        h2 Enter the membership code to gain full membership
+      if currentUser.isMember == true
+        h2 You are currently a full member
+        h2 The membership code is "Kenneth"
+      div(class="form-group")
+        label(for="email") Membership Code
+        input(type="text" name="code")
+      div(class="form-group")  
+        button(type="submit" class="button") Upgrade Membership

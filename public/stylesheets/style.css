@@ -19,30 +19,31 @@ a {
   color: #00b7ff;
 }
 
-.sub-header {
-  text-align: center;
-  padding: 1rem;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
 .content {
+  padding-top: 3rem;
 }
 
 /* Main Nav */
+
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
   padding: 0.5rem 10rem;
   background: #20232a;
+}
+
+.right-links {
+  display: flex;
 }
 
 .main-title {
   padding: 1rem;
   text-align: center;
   font-size: 2rem;
-  color: #ff6633;
+  color: #e67e22;
   text-decoration: none;
 }
 
@@ -53,10 +54,24 @@ a {
   font-size: 1.2rem;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: #e67e22;
+}
+
 .main-title:hover {
-  filter: brightness(90%);
-  text-decoration: underline;
+  color: #fff;
+}
+
+.new-post {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem 0.5rem;
+  border: 0.1rem solid #aaa;
+  border-radius: 0.5rem;
+  background: #388e3c;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* welcome mat */
@@ -71,39 +86,59 @@ a {
   background: #282c34;
 }
 
-.welcome-mat h1 {
+.welcome-heading {
   padding: 1rem;
   font-size: 2rem;
-  color: #ff6633;
+  color: #e67e22;
   font-weight: bolder;
 }
 
-.welcome-mat h2 {
+.welcome-sub-heading {
   padding: 1rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: #fff;
 }
 
-.welcome-mat a {
+.welcome-button {
   padding: 1rem;
   color: #000;
-  background: #ff6633;
+  background: #e67e22;
   border: 0.1rem solid #333;
   border-radius: 0.5rem;
   font-size: 1.2rem;
   text-decoration: none;
 }
 
-.welcome-mat a:hover {
-  filter: brightness(90%);
+.welcome-button:hover {
+  background: #fff;
+}
+
+.sub-header {
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.welcome-footer {
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #282c34;
 }
 
 /* forms */
 
 .form-box {
+  height: 75vh;
   display: flex;
+
   justify-content: space-evenly;
+  align-items: center;
   margin: 3rem auto;
 }
 
@@ -160,6 +195,7 @@ form input {
 form textarea {
   width: 100%;
   height: 10rem;
+  padding: 0.5rem;
   resize: none;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
@@ -186,23 +222,8 @@ form button {
 
 /* post stuff */
 
-.new-post {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  padding: 2rem 0.5rem;
-  border: 0.1rem solid #aaa;
-  border-radius: 50%;
-  background: #388e3c;
-  color: #fff;
-  text-decoration: none;
-}
-
 .post-box {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-  padding: 2rem 10rem;
+  padding: 1rem 10rem;
 }
 
 .post-card {
@@ -212,20 +233,21 @@ form button {
   border: 0.1rem solid #ccc;
   border-radius: 0.5rem;
   background: #fff;
+  overflow: hidden;
+  margin: 0.5rem;
 }
 
 .post-header {
-  padding: 0.5rem;
-  background: #20232a;
+  padding: 0.5rem 1rem;
 }
 
 .post-author {
-  font-size: 1rem;
-  color: #fff;
+  font-size: 0.9rem;
+  color: #999;
 }
 
 .post-body {
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .post-title {
@@ -238,12 +260,26 @@ form button {
 }
 
 .post-footer {
-  padding: 0.5rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  border-top: 0.1rem solid #ccc;
 }
 
-.post-date {
-  font-size: 0.8rem;
-  font-style: italic;
+.update-post,
+.delete-post {
+  color: #999;
+  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 1rem;
+}
+
+.update-post:hover,
+.delete-post:hover {
+  color: #000;
+  text-decoration: underline;
 }
 
 /* Error stuff */
@@ -251,7 +287,7 @@ form button {
 .error,
 .success {
   font-size: 1rem;
-  width: 90%;
+  width: 100%;
   padding: 1rem;
   border: 0.1rem solid #ccc;
   border-radius: 0.5rem;

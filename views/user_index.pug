@@ -1,8 +1,0 @@
-extends layout
-
-block content
-  h1= title
-  each user in users
-    h2= user.firstName + " " + user.lastName
-    a(href="user.url") link to their profile
-  
