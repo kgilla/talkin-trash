@@ -3,10 +3,8 @@ const Post = require("../models/post");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
-const { NetworkAuthenticationRequire } = require("http-errors");
 
 // Login functions
-
 exports.loginGet = (req, res) => {
   res.render("log_in_form", {
     title: "Log In",
@@ -19,6 +17,7 @@ exports.loginPost = passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/users/login",
   failureFlash: true,
+  successFlash: true,
 });
 
 exports.logout = (req, res) => {
@@ -27,7 +26,6 @@ exports.logout = (req, res) => {
 };
 
 // Membership functions
-
 exports.membershipGet = (req, res) => {
   if (req.user) {
     res.render("membership_form", { title: "Membership" });
@@ -69,7 +67,6 @@ exports.membershipPost = [
 ];
 
 // Sign Up Functions
-
 exports.signupGet = (req, res) => {
   res.render("sign_up_form", { title: "Sign Up" });
 };
@@ -160,6 +157,7 @@ exports.signupPost = [
   },
 ];
 
+// Update Functions
 exports.updateGet = (req, res, next) => {
   if (req.user) {
     User.findById(req.params.id).exec((err, user) => {
@@ -352,9 +350,11 @@ exports.passwordPost = [
   },
 ];
 
+// Delete Functions
 exports.userDeleteGet = (req, res) => {};
 exports.userDeleteGet = (req, res) => {};
 
+// User Profile
 exports.userDetail = async (req, res) => {
   if (req.user) {
     Post.find({ author: req.user.id })

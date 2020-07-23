@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  if success != ""
-    h2(class="success")= success
   if currentUser
     div(class="content")
+      if success != ""
+        h2(class="success")= success
       div(class="post-box")
         h2(class="sub-header") Most Recent Posts
         each post in posts
