@@ -3,6 +3,7 @@ const Post = require("../models/post");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+const { NetworkAuthenticationRequire } = require("http-errors");
 
 // Login functions
 
@@ -38,11 +39,12 @@ exports.membershipGet = (req, res) => {
 
 exports.membershipPost = [
   // Checks if field is empty
-  body("code").not().isEmpty().withMessage("You must enter a code"),
+  body("code").not().isEmpty().withMessage("You must enter a code").trim(),
   // Checks if field is correct password
-  body("code").equals("Kenneth").withMessage("Sorry the code is incorrect"),
-  // Cleans up field
-  body("*").escape().trim(),
+  body("code")
+    .equals(process.env.SECRET_PASSWORD)
+    .withMessage("Sorry the code is incorrect")
+    .trim(),
 
   (req, res, next) => {
     const code = req.body;
@@ -74,40 +76,54 @@ exports.signupGet = (req, res) => {
 
 exports.signupPost = [
   // Checks names are entered
-  body("first_name").not().isEmpty().withMessage("First name is required"),
-  body("last_name").not().isEmpty().withMessage("Last name is required"),
+  body("first_name")
+    .not()
+    .isEmpty()
+    .withMessage("First name is required")
+    .trim(),
+
+  body("last_name").not().isEmpty().withMessage("Last name is required").trim(),
 
   // checks email
-  body("email").not().isEmpty().withMessage("Email is required"),
-  body("email").isEmail().withMessage("Must be valid email address"),
-  body("email").custom((value) => {
-    return User.findOne({ email: value }).then((user) => {
-      if (user) {
-        return Promise.reject("Email is already in use");
-      }
-      Promise.resolve(true);
-    });
-  }),
+  body("email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Must be valid email address")
+    .custom((value) => {
+      return User.findOne({ email: value }).then((user) => {
+        if (user) {
+          return Promise.reject("Email is already in use");
+        }
+        Promise.resolve(true);
+      });
+    })
+    .trim()
+    .normalizeEmail(),
 
   // checks password
-  body("password").not().isEmpty().withMessage("Password is required"),
-
-  // password must be at least 5 chars long
   body("password")
+    .not()
+    .isEmpty()
+    .withMessage("Password is required")
     .isLength({
-      min: 5,
+      min: 6,
     })
-    .withMessage("password must be at least 5 characters long"),
+    .withMessage("password must be at least 6 characters long")
+    .trim(),
 
   // checks passwords match
-  body("password2").custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error("Password confirmation does not match password");
-    }
-    return true;
-  }),
+  body("password2")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Password confirmation does not match password");
+      }
+      return true;
+    })
+    .trim(),
 
-  body("*").trim().escape(),
+  body("*").escape(),
 
   (req, res, next) => {
     const { email, password, first_name, last_name } = req.body;
@@ -144,12 +160,202 @@ exports.signupPost = [
   },
 ];
 
-exports.userUpdateGet = (req, res) => {};
-exports.userUpdatePost = (req, res) => {};
+exports.updateGet = (req, res, next) => {
+  if (req.user) {
+    User.findById(req.params.id).exec((err, user) => {
+      if (err) {
+        return next(err);
+      }
+      res.render("info_change_form", { user });
+    });
+  } else {
+    req.flash("error", "Please log in");
+    res.redirect("/users/login");
+  }
+};
+
+exports.updatePost = [
+  // Checks names are entered
+  body("first_name")
+    .not()
+    .isEmpty()
+    .withMessage("First name is required")
+    .trim(),
+
+  body("last_name").not().isEmpty().withMessage("Last name is required").trim(),
+
+  // checks email
+  body("email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Must be valid email address")
+    .trim(),
+
+  // checks password
+  body("password").not().isEmpty().withMessage("Password is required").trim(),
+
+  (req, res, next) => {
+    const { email, first_name, last_name, password } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render("info_change_form", {
+        errors: errors.array(),
+        email,
+        first_name,
+        last_name,
+      });
+      return;
+    }
+
+    User.findById(req.params.id).exec((err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (user.email !== email) {
+        User.findOne({ email: email }, (err, user) => {
+          if (err) {
+            return next(err);
+          }
+          if (user) {
+            res.render("info_change_form", {
+              error: "Email in use",
+              email,
+              first_name,
+              last_name,
+            });
+          }
+        });
+      }
+      bcrypt.compare(password, user.password, (err, response) => {
+        if (err) {
+          return next(err);
+        }
+        if (response == false) {
+          res.render("info_change_form", {
+            error: "Password incorrect",
+            email,
+            first_name,
+            last_name,
+          });
+        } else if (response == true) {
+          User.findByIdAndUpdate(
+            req.params.id,
+            {
+              email: email,
+              firstName: first_name,
+              lastName: last_name,
+            },
+            {},
+            (err) => {
+              if (err) {
+                return next(err);
+              }
+              req.flash(
+                "success",
+                "Your account has been updated successfully"
+              );
+              res.redirect(req.user.url);
+            }
+          );
+        }
+      });
+    });
+  },
+];
+
+exports.passwordGet = (req, res) => {
+  if (req.user) {
+    res.render("password_change_form");
+  } else {
+    req.flash("error", "Please log in");
+    res.redirect("/users/login");
+  }
+};
+exports.passwordPost = [
+  // checks old password
+  body("old_password")
+    .not()
+    .isEmpty()
+    .withMessage("Please enter old password")
+    .trim(),
+
+  // checks new password
+  body("password")
+    .not()
+    .isEmpty()
+    .withMessage("Password is required")
+    .trim()
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
+
+  // checks passwords match
+  body("password2")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Password confirmation does not match password");
+      }
+      return true;
+    })
+    .trim(),
+
+  (req, res, next) => {
+    const { old_password, password } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render("password_change_form", {
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    User.findById(req.params.id).exec((err, user) => {
+      if (err) {
+        return next(err);
+      }
+      bcrypt.compare(old_password, user.password, (err, response) => {
+        if (err) {
+          return next(err);
+        }
+        if (response == false) {
+          res.render("password_change_form", {
+            error: "Password incorrect",
+          });
+        } else if (response == true) {
+          bcrypt.hash(password, 10, (err, hashedPassword) => {
+            User.findByIdAndUpdate(
+              req.params.id,
+              {
+                password: hashedPassword,
+              },
+              {},
+              (err) => {
+                if (err) {
+                  return next(err);
+                }
+                req.flash(
+                  "success",
+                  "Your account has been updated successfully"
+                );
+                res.redirect(req.user.url);
+              }
+            );
+          });
+        }
+      });
+    });
+  },
+];
+
 exports.userDeleteGet = (req, res) => {};
 exports.userDeleteGet = (req, res) => {};
 
-exports.userDetail = (req, res) => {
+exports.userDetail = async (req, res) => {
   if (req.user) {
     Post.find({ author: req.user.id })
       .populate("author")
@@ -157,22 +363,11 @@ exports.userDetail = (req, res) => {
         if (err) {
           return next(err);
         }
-        res.render("profile", { posts });
+        const count = posts.length;
+        res.render("profile", { posts, count, success: req.flash("success") });
       });
   } else {
-    res.redirect("/users/login");
-  }
-};
-
-exports.userIndex = async (req, res) => {
-  if (req.user) {
-    await User.find().exec((err, users) => {
-      if (err) {
-        return next(err);
-      }
-      res.render("user_index", { title: "All Users", users: users });
-    });
-  } else {
+    req.flash("error", "You must sign in to view that");
     res.redirect("/users/login");
   }
 };

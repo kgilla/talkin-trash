@@ -9,13 +9,12 @@ router.get("/signup", userController.signupGet);
 router.post("/signup", userController.signupPost);
 router.get("/:id/membership", userController.membershipGet);
 router.post("/:id/membership", userController.membershipPost);
-// router.get("/membership", userController.membershipGet);
-// router.post("/membership", userController.membershipPost);
 // router.get("/:id/delete", userController.userDeleteGet);
 // router.post("/:id/delete", userController.userDeletePost);
-// router.get("/:id/update", userController.userUpdateGet);
-// router.post("/:id/update", userController.userUpdatePost);
+router.get("/:id/update", userController.updateGet);
+router.post("/:id/update", userController.updatePost);
+router.get("/:id/password", userController.passwordGet);
+router.post("/:id/password", userController.passwordPost);
 router.get("/:id", userController.userDetail);
-router.get("/", userController.userIndex);
 
 module.exports = router;

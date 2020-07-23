@@ -1,30 +1,36 @@
 extends layout
 
 block content
-  div(class="profile-box")
-    h2 #{currentUser.name}'s Profile
-    a(href="") Change Email
-    a(href="") Change Name
-    a(href="") Change Password
-    a(href="") Upgrade Membership
-    if posts
-      div(class="post-box")
-        each post in posts
-          div(class="post-card")
-            div(class="post-header")
-              h2(class="post-author") Posted by You on #{post.niceDate}
-            div(class="post-body")
-              h2(class="post-title")= post.title
-              p(class="post-content")= post.content
-            div(class="post-footer")
-              a(href=post.url + "/update" class="update-post") Update 
-              a(href="" class="delete-post") Delete
-      a(href="/posts/create" class="new-post") New Post +
-    else 
-      h2 No Posts Yet
-      a(href="/posts/create") Create New Post
-
-
-
-      
-  
+  div(class="content")
+    if success != ""
+      h2(class="success")= success
+    h1(class="title") Profile
+    div(class="profile-box")
+      div(class="profile-info")
+        h2(class="profile-name") #{currentUser.name}
+        h2(class="profile-info-item") Email: #{currentUser.email}
+        if currentUser.isMember == true
+          h2(class="profile-info-item") Membership: Treasure
+        else 
+          h2(class="profile-info-item") Membership: Trash
+        h2(class="profile-info-item") Total Posts: #{count}
+        a(href=currentUser.url + "/update" class="profile-info-button") Change Email/Name
+        a(href=currentUser.url + "/password" class="profile-info-button") Change Password
+      if posts != ""
+        div(class="profile-posts")
+          h2(class="sub-header") Recent Posts
+          each post in posts
+            div(class="post-card")
+              div(class="post-header")
+                h2(class="post-author") Posted by You on #{post.niceDate}
+              div(class="post-body")
+                h2(class="post-title")= post.title 
+                p(class="post-content")= post.content
+              div(class="post-footer")
+                a(href=post.url + "/update" class="update-post") Update 
+                a(href=post.url + "/delete" class="delete-post") Delete
+        a(href="/posts/create" class="new-post") New Post +
+      else 
+        div(class="no-posts")
+          h2(class="sub-header") No Posts Yet
+          a(href="/posts/create" class="welcome-button") Create New Post

@@ -9,23 +9,23 @@ block content
         li(class="info-list-item") Sign up and create an account 
         li(class="info-list-item") Apply for membership
         li(class="info-list-item") See who's been talking about you!
-    form(action="/users/signup" method="POST" class="form-control")
+    form(action="/users/signup" method="POST" class="signup-form")
       h2(class="title")= title
       if errors 
         each error in errors
           p(class="error")= error.msg 
       div(class="form-group")
         label(for="firstName") First Name
-        input(type="text" name="first_name" placeholder="First Name" required="true" value= first_name ? first_name : "")
+        input(type="text" name="first_name" required="true" value= first_name ? first_name : "")
       div(class="form-group")
         label(for="lastName") Last Name
-        input(type="text" name="last_name" placeholder="Last Name" required="true" value= last_name ? last_name : "")
+        input(type="text" name="last_name" required="true" value= last_name ? last_name : "")
       div(class="form-group")
         label(for="email") Email
-        input(type="text" name="email" placeholder="Your Email" required="true" value= email ? email : "")
+        input(type="text" name="email" placeholder="Email@example.com" required="true" value= email ? email : "")
       div(class="form-group")
         label(for="password") Password
-        input(type="text" name="password" placeholder="Password" required="true")
+        input(type="text" name="password" placeholder="Password must be at least 6 characters" required="true")
       div(class="form-group")
         label(for="password2") Confirm Password
         input(type="text" name="password2" placeholder="Confirm Password" required="true")

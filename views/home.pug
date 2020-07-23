@@ -4,40 +4,42 @@ block content
   if success != ""
     h2(class="success")= success
   if currentUser
-    div(class="post-box")
-      h2(class="sub-header") Most Recent Posts
-      each post in posts
-        div(class="post-card")
-          div(class="post-header")
-            if post.author.id == currentUser.id
-              h2(class="post-author") Posted by You on #{post.niceDate}
-            else 
-              h2(class="post-author") Posted by #{post.author.name} on #{post.niceDate}
-          div(class="post-body")
-            h2(class="post-title")= post.title
-            p(class="post-content")= post.content
-          div(class="post-footer")
-            if post.author.id == currentUser.id
-              a(href=post.url + "/update" class="update-post") Update 
-              a(href="" class="delete-post") Delete
-              if post.updated
-                h2 Last updated on #{post.niceUpdated}
-      a(href="posts/create" class="new-post") New Post +
+    div(class="content")
+      div(class="post-box")
+        h2(class="sub-header") Most Recent Posts
+        each post in posts
+          div(class="post-card")
+            div(class="post-header")
+              if post.author.id == currentUser.id
+                h2(class="post-author") Posted by You on #{post.niceDate}
+              else 
+                h2(class="post-author") Posted by #{post.author.name} on #{post.niceDate}
+            div(class="post-body")
+              h2(class="post-title")= post.title
+              p(class="post-content")= post.content
+            div(class="post-footer")
+              if post.author.id == currentUser.id
+                a(href=post.url + "/update" class="update-post") Update 
+                a(href=post.url + "/delete" class="delete-post") Delete
+                if post.updated
+                  p(class="last-updated") Last updated on #{post.niceUpdated}
+        a(href="posts/create" class="new-post") New Post +
   else
     div(class="welcome-mat")
       h1(class="welcome-heading") Talkin' Trash
       h2(class="welcome-sub-heading") People are always talking, maybe even about you!
       a(href="/users/signup" class="welcome-button") Sign Up
-    h2(class="sub-header") Here's what some members have been saying!
-    div(class="post-box") 
-      each post in smallPosts
-        div(class="post-card")
-          div(class="post-header")
-            h2(class="post-author") Posted by ???? on ????
-          div(class="post-body")
-            h2(class="post-title")= post.title
-            p(class="post-content")= post.content
+    div(class="content")
+      div(class="post-box") 
+        h2(class="sub-header") Here's what some members have been saying!
+        each post in smallPosts
+          div(class="post-card")
+            div(class="post-header")
+              h2(class="post-author") Posted by ???? on ????
+            div(class="post-body")
+              h2(class="post-title")= post.title
+              p(class="post-content")= post.content
     div(class="welcome-footer")
-      h2(class="welcome-sub-heading") Become a part of something and start talkin' some trash!
+      h2(class="sub-header") Become a part of something and start talkin' some trash!
       a(href="/users/signup" class="welcome-button") Sign Up
 

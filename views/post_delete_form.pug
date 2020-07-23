@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div(class="form-box")
+    form(action="" method="post" class="delete-form")
+      h1(class="sub-header") Delete Post
+      div(class="post-card")
+        div(class="post-header")
+          h2(class="post-author") Posted by You on #{post.niceDate}
+        div(class="post-body")
+          h2(class="post-title")= post.title
+          p(class="post-content")= post.content
+      h2(class="sub-header") Are you sure you want to delete this post?
+      a(href="/" class="dont-delete") No I Love This Post!
+      button(class="confirm-delete" type="submit") Yes Delete This Trash!

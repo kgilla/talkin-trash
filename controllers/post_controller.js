@@ -1,5 +1,4 @@
 const Post = require("../models/post");
-const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 
 exports.createGet = (req, res) => {
@@ -12,11 +11,12 @@ exports.createGet = (req, res) => {
 };
 
 exports.createPost = [
-  body("title").not().isEmpty().withMessage("Title is required"),
+  body("title").trim().isLength({ min: 1 }).withMessage("Title is required"),
 
-  body("content").not().isEmpty().withMessage("An actual message is required"),
-
-  body("*").trim().escape(),
+  body("content")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("An actual message is required"),
 
   (req, res, next) => {
     const { title, content } = req.body;
@@ -63,11 +63,12 @@ exports.updateGet = (req, res, next) => {
 };
 
 exports.updatePost = [
-  body("title").not().isEmpty().withMessage("Title is required"),
+  body("title").trim().isLength({ min: 1 }).withMessage("Title is required"),
 
-  body("content").not().isEmpty().withMessage("An actual message is required"),
-
-  body("*").trim().escape(),
+  body("content")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("An actual message is required"),
 
   (req, res, next) => {
     const { title, content } = req.body;
@@ -104,6 +105,32 @@ exports.updatePost = [
     );
   },
 ];
-exports.deleteGet = (req, res, next) => {};
-exports.deletePost = (req, res, next) => {};
-exports.detail = (req, res, next) => {};
+
+exports.deleteGet = (req, res, next) => {
+  if (req.user) {
+    Post.findById(req.params.id).exec((err, post) => {
+      if (err) {
+        return next(err);
+      }
+      res.render("post_delete_form", { post });
+    });
+  } else {
+    req.flash("error", "Please Log In");
+    res.redirect("/users/login");
+  }
+};
+
+exports.deletePost = (req, res, next) => {
+  if (req.user) {
+    Post.findByIdAndDelete(req.params.id, {}, (err, success) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("success", "Post deleted successfully!");
+      res.redirect(req.user.url);
+    });
+  } else {
+    req.flash("error", "Please Log In");
+    res.redirect("/users/login");
+  }
+};

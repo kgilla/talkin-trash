@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  div(class="content")
+    div(class="form-box")
+      form(action="" method="POST")
+        h1(class="title") Update Name / Email
+        if errors 
+          each error in errors
+            p(class="error")= error.msg
+        if error
+          p(class="error")= error
+        div(class="form-group")
+          label(for="first_name") First Name
+          input(type="text" name="first_name" value=user ? user.firstName : first_name)
+        div(class="form-group")
+          label(for="last_name") Last Name
+          input(type="text" name="last_name" value=user ? user.lastName : last_name) 
+        div(class="form-group")
+          label(for="email") Email
+          input(type="text" name="email" value=user ? user.email : email) 
+        div(class="form-group")
+          label(for="password") Enter Your Password
+          input(type="text" name="password" placeholder="confirm your password") 
+        div(class="form-group")  
+          button(type="submit" class="button") Confirm Changes
+          

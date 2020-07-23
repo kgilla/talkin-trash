@@ -23,7 +23,7 @@ const userRouter = require("./routes/users");
 // Mongoose DB
 var mongoose = require("mongoose");
 var mongoDB = process.env.DB_URL;
-mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
