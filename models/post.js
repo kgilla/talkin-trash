@@ -5,7 +5,7 @@ const moment = require("moment");
 const PostSchema = new Schema({
   date: { type: Date, default: Date.now() },
   updated: { type: Date, default: "" },
-  author: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  author: { type: Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true, min: 1, max: 60 },
   content: { type: String, required: true, min: 1, max: 180 },
 });

@@ -40,12 +40,18 @@ a {
   align-items: center;
   position: fixed;
   width: 100%;
-  padding: 0.5rem 10rem;
+  padding: 0rem 10rem;
   background: #20232a;
+}
+
+.left-links {
+  display: flex;
+  align-items: center;
 }
 
 .right-links {
   display: flex;
+  align-items: center;
 }
 
 .main-title {
@@ -127,6 +133,24 @@ a {
 .sub-header {
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
+}
+
+.welcome-trio {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.trio-header {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.trio {
+  padding: 1rem;
+  border: 1px solid #000;
 }
 
 .welcome-footer {
