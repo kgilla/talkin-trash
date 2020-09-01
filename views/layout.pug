@@ -2,29 +2,32 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/stylesheets/reset.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' href='/stylesheets/reset.css')
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    link(rel='stylesheet' href='/stylesheets/navbar.css')
+    link(rel='stylesheet' href='/stylesheets/forms.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
     title Talkin' Trash
   body
     script 0
-    nav(class="main-nav")
-      div(class="left-links")
-        img(src="/images/PngItem_857300.png" height="40px" width="50px")
-        a(href="/" class="main-title") Talkin' Trash         
-      div(class="right-links")
-        if currentUser
-          a(href=currentUser.url + "/membership" class="nav-link") Membership
-          a(href=currentUser.url class="nav-link") Profile
-          a(href="/users/logout" class="nav-link") Logout
-        else
-          a(href="/users/signup" class="nav-link") Sign Up
-          a(href="/users/login" class="nav-link") Log In
+    div.nav-box
+      div.container
+        nav.navbar.navbar-expand-lg.main-nav.navbar-dark
+          div.left-links
+            img(src="/images/PngItem_857300.png" class="nav-img")
+            a(href="/" class="main-title") Talkin' Trash 
+          button.navbar-toggler.hamburger(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
+            div.navbar-nav.mr-auto.right-links
+            if currentUser
+              a(href=currentUser.url + "/membership" class="nav-link") Membership
+              a(href=currentUser.url class="nav-link") Profile
+              a(href="/users/logout" class="nav-link") Logout
+            else
+              a(href="/users/signup" class="nav-link") Sign Up
+              a(href="/users/login" class="nav-link") Log In   
     block content
-    footer(class="main-footer")
-      a(href="" class="nav-link") About
-      a(href="" class="nav-link") Contact
-      a(href="" class="nav-link") Donate
-
-  
-

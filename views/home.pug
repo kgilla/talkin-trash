@@ -2,7 +2,7 @@ extends layout
 
 block content
   if currentUser
-    div(class="content")
+    div(class="container")
       if success != ""
         h2(class="success")= success
       div(class="post-box")
@@ -25,32 +25,32 @@ block content
                   p(class="last-updated") Last updated on #{post.niceUpdated}
         a(href="posts/create" class="new-post") New Post +
   else
-    div(class="welcome-mat")
-      h1(class="welcome-heading") Talkin' Trash
-      h2(class="welcome-sub-heading") People are always talking, maybe even about you!
-      img(src="images/pngguru.com.png" width="200px" height="200px")
+    div.welcome-mat
+      h1.welcome-heading Talkin' Trash
+      h2.welcome-sub-heading People are always talking, maybe even about you!
+      img(src="images/pngguru.com.png" class="welcome-img" alt="cartoon racoon")
       a(href="/users/signup" class="welcome-button") Sign Up
-    div(class="content")
-      div(class="welcome-trio")
-        div(class="trio")
-          h2(class="trio-header") Talk Trash
-          p Everyone loves talking about other people! Its always better when you can do it without the reprecussions of seeing them face to face.
-        div(class="trio")
-          h2(class="trio-header") Membership
-          p You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
-        div(class="trio")
-          h2(class="trio-header") Membership
-          p You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
-      div(class="post-box") 
-        h2(class="sub-header") Here's what some members have been saying!
+    div.container
+      div.row.mt-5
+        div.col-md
+          h4.sub-heading Talk Trash
+          p.trio-content Everyone loves talking about other people! Its always better when you can do it without the reprecussions of seeing them face to face.
+        div.col-md
+          h4.sub-heading Membership
+          p.trio-content You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
+        div.col-md
+          h4.sub-heading Membership
+          p.trio-content You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
+      h3.sub-heading.mt-5 Here's what some members have been saying!
+      div.post-box.mt-3
         each post in smallPosts
           div(class="post-card")
             div(class="post-header")
-              h2(class="post-author") Posted by ???? on ????
+              h1(class="post-title")= post.title
+              h3(class="post-author") Posted by ???? on ????
             div(class="post-body")
-              h2(class="post-title")= post.title
-              p(class="post-content")= post.content
-    div(class="welcome-footer")
-      h2(class="sub-header") Become a part of something and start talkin' some trash!
+              p.post-content= post.content
+    div.welcome-footer.mt-5
+      h3.sub-heading Become a part of something and start talkin' some trash!
       a(href="/users/signup" class="welcome-button") Sign Up
 

@@ -10,11 +10,11 @@ const userSchema = new Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
-UserSchema.virtual("url").get(function () {
+userSchema.virtual("url").get(function () {
   return "/users/" + this._id;
 });
 
-UserSchema.virtual("name").get(function () {
+userSchema.virtual("name").get(function () {
   return this.firstName + " " + this.lastName;
 });
 
