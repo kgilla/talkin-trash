@@ -1,0 +1,64 @@
+.login-form {
+  max-width: 40rem;
+  padding: 2rem;
+  margin: 4rem auto;
+  border: 0.1rem solid #eee;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Sign up form */
+
+.form-info {
+  background: #fff;
+  border: 0.1rem solid #eee;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.info-title {
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.info-list {
+  padding: 1rem;
+}
+
+.info-list-item {
+  font-size: 1.2rem;
+  margin-top: 3rem;
+}
+
+.signup-form {
+  padding: 1rem;
+  margin: 0 auto;
+  border: 0.1rem solid #eee;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+/* Post Form */
+
+.post-form {
+  max-width: 40rem;
+  padding: 2rem;
+  margin: 4rem auto;
+  border: 0.1rem solid #eee;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+form textarea {
+  height: 20rem;
+  resize: vertical;
+}

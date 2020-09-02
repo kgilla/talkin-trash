@@ -14,20 +14,20 @@ block content
         if errors 
           each error in errors
             p(class="error")= error.msg 
-        div(class="form-group")
-          label(for="firstName") First Name
+        div(class="form-group").mb-4
+          label.mb-2(for="firstName") First Name
           input(class="form-control" type="text" name="first_name" required="true" value= first_name ? first_name : "")
-        div(class="form-group")
-          label(for="lastName") Last Name
+        div(class="form-group").mb-4
+          label.mb-2(for="lastName") Last Name
           input(class="form-control" type="text" name="last_name" required="true" value= last_name ? last_name : "")
-        div(class="form-group")
-          label(for="email") Email
+        div(class="form-group").mb-4
+          label.mb-2(for="email") Email
           input(class="form-control" type="text" name="email" placeholder="Email@example.com" required="true" value= email ? email : "")
-        div(class="form-group")
-          label(for="password") Password
+        div(class="form-group").mb-4
+          label.mb-2(for="password") Password
           input(class="form-control" type="text" name="password" placeholder="Password must be at least 6 characters" required="true")
-        div(class="form-group")
-          label(for="password2") Confirm Password
+        div(class="form-group").mb-4
+          label.mb-2(for="password2") Confirm Password
           input(class="form-control" type="text" name="password2" placeholder="Confirm Password" required="true")
-        div(class="form-group")  
+        div(class="form-group").mb-4  
           button(type="submit" class="btn btn-secondary btn-block") Sign Up!

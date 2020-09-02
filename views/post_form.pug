@@ -1,33 +1,32 @@
 extends layout
 
 block content
-  div(class="content")
-    div(class="form-box")
-      if heading == "Update Post"
-        form(action="" method="POST" class="form-control")
-          h1(class="title")= heading
-          if errors 
-            each error in errors
-              p(class="error")= error.msg 
-          div(class="form-group")
-            label(for="title") Title
-            input(type="text" name="title" value=post.title)
-          div(class="form-group")
-            label(for="content") Content
-            textarea(name="content")= post.content
-          div(class="form-group")  
-            button(type="submit" class="button") Update Post
-      else
-        form(action="/posts/create" method="POST" class="form-control")
-          h1(class="title")= heading
-          if errors 
-            each error in errors
-              p(class="error")= error.msg 
-          div(class="form-group")
-            label(for="title") Title
-            input(type="text" name="title" value= title ? title : "")
-          div(class="form-group")
-            label(for="content") Content
-            textarea(name="content")= content ? content : ""
-          div(class="form-group")  
-            button(type="submit" class="button") Create Post
+  div.container.mt-5
+    if heading == "Update Post"
+      form(action="" method="POST" class="post-form")
+        h1.main-heading= heading
+        if errors 
+          each error in errors
+            p(class="error")= error.msg 
+        div.form-group.mb-4
+          label.mb-2(for="title") Title
+          input(class="form-control" type="text" name="title" value=post.title)
+        div.form-group.mb-4
+          label.mb-2(for="content") Content
+          textarea(class="form-control" name="content")= post.content
+        div.form-group.mb-4  
+          button(type="submit" class="btn btn-secondary btn-block") Update Post
+    else
+      form(action="/posts/create" method="POST" class="post-form")
+        h1.main-heading= heading
+        if errors 
+          each error in errors
+            p.error= error.msg 
+        div.form-group.mb-4
+          label.mb-2(for="title") Title
+          input(class="form-control" type="text" name="title" value= title ? title : "")
+        div.form-group.mb-4
+          label.mb-2(for="content") Content
+          textarea(class="form-control" name="content")= content ? content : ""
+        div.form-group.mb-4 
+          button(type="submit" class="btn btn-secondary btn-block") Create Post
