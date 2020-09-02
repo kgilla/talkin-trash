@@ -1,0 +1,111 @@
+/* post stuff */
+
+.new-post {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: $primary;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.new-post:hover {
+  color: #fff;
+  text-decoration: none;
+  filter: brightness(90%);
+}
+
+.post-box {
+  display: grid;
+  gap: 2rem;
+}
+
+.post-card {
+  display: grid;
+  grid-template-rows: 1fr 1fr 3rem;
+  border: 0.1rem solid $secondary;
+  border-radius: 0.5rem;
+  background: #fff;
+
+  overflow: hidden;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: $secondary;
+}
+
+.post-title {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.post-author {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.post-content {
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  border-top: 0.1rem solid #eee;
+}
+
+.update-post,
+.delete-post,
+.last-updated {
+  color: #999;
+  font-size: 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 1rem;
+}
+
+.update-post:hover,
+.delete-post:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.delete-form {
+  width: 75%;
+}
+
+.dont-delete,
+.confirm-delete {
+  width: 60%;
+  padding: 0.5rem;
+  border: 0.1rem solid #aaa;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.dont-delete {
+  padding: 0.75rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.dont-delete:hover {
+  background: #388e3c;
+  color: #fff;
+}
+
+.confirm-delete {
+  background: #ff0000;
+}

@@ -1,5 +1,14 @@
+// variables
+
+$primary: #e67e22;
+$secondary: #20232a;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "./reset.scss";
-@import "./style.scss";
-@import "./forms.scss";
-@import "./navbar.scss";
+@import "./reset";
+@import "./style";
+@import "./forms";
+@import "./navbar";
+@import "./profile";
+@import "./posts";
+@import "./flash";
+@import "./home";

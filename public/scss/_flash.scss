@@ -1,0 +1,16 @@
+/* Error stuff */
+
+.error,
+.success {
+  font-size: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.error {
+  background: #ef9a9a;
+}
+
+.success {
+  background: #a5d6a7;
+}

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div.container.mt-5
+  div.container.h-75.center-content
     if heading == "Update Post"
       form(action="" method="POST" class="post-form")
         h1.main-heading= heading
@@ -29,4 +29,4 @@ block content
           label.mb-2(for="content") Content
           textarea(class="form-control" name="content")= content ? content : ""
         div.form-group.mb-4 
-          button(type="submit" class="btn btn-secondary btn-block") Create Post
+          button(type="submit" class="btn btn-primary btn-block") Create Post

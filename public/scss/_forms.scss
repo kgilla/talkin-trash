@@ -1,0 +1,66 @@
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+form {
+  width: 100%;
+  max-width: 40rem;
+  padding: 2rem;
+  margin: auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+a {
+  color: $primary;
+}
+
+a:hover {
+  color: $primary;
+  text-decoration: underline;
+}
+
+/* Sign up form */
+
+.form-info {
+  display: grid;
+  gap: 1rem;
+  padding: 3rem;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.info-box * {
+  text-align: left;
+}
+
+.info-icon {
+  height: 2rem;
+  width: auto;
+  margin-right: 1rem;
+}
+
+form textarea {
+  height: 20rem;
+  resize: vertical;
+}

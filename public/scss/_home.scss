@@ -1,0 +1,60 @@
+/* welcome mat / new user greeting */
+
+.welcome-mat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background: #282c34;
+}
+
+.welcome-heading {
+  font-size: 3rem;
+  color: $primary;
+  font-weight: 700;
+  text-align: center;
+}
+
+.welcome-sub-heading {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.welcome-img {
+  height: 200px;
+  width: auto;
+  margin-left: 1.5rem;
+}
+
+.welcome-button {
+  padding: 1rem;
+  color: #000;
+  background: $primary;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.welcome-button:hover {
+  color: #000;
+  background: #fff;
+  text-decoration: none;
+}
+
+.trio-content {
+  text-align: center;
+  line-height: 2;
+}
+
+.welcome-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

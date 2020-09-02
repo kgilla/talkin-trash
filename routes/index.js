@@ -12,7 +12,7 @@ router.get("/", (req, res, next) => {
       }
       const smallPosts = posts.slice(0, 5);
       res.render("home", {
-        title: "welcome",
+        title: "Talkin' Trash",
         posts: posts,
         smallPosts: smallPosts,
         success: req.flash("success"),

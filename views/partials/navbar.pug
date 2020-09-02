@@ -1,0 +1,18 @@
+navbar
+  div.nav-box
+    div.container
+      nav.navbar.navbar-expand-lg.main-nav.navbar-dark
+        div.left-links
+          img(src="/images/PngItem_857300.png" class="nav-img")
+          a(href="/" class="main-title") Talkin' Trash 
+        button.navbar-toggler.hamburger(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          div.navbar-nav.mr-auto.right-links
+          if currentUser
+            a(href=currentUser.url + "/membership" class="nav-link") Membership
+            a(href=currentUser.url class="nav-link") Profile
+            a(href="/users/logout" class="nav-link") Logout
+          else
+            a(href="/users/signup" class="nav-link") Sign Up
+            a(href="/users/login" class="nav-link") Log In 

@@ -28,7 +28,7 @@
   font-weight: 700;
   text-align: center;
   font-size: 1.4rem;
-  color: #e67e22;
+  color: $primary;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -41,7 +41,7 @@
 }
 
 .nav-link:hover {
-  color: #e67e22;
+  color: $primary;
 }
 
 .main-title:hover {

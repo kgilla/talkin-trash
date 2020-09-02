@@ -52,6 +52,7 @@ exports.membershipPost = [
       res.render("membership_form", {
         errors: errors.array(),
         code: code,
+        title: "Membership",
       });
       return;
     }

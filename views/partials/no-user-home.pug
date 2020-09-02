@@ -1,0 +1,29 @@
+no-user-home
+  div.welcome-mat
+    h1.welcome-heading Talkin' Trash
+    h2.welcome-sub-heading People are always talking, maybe even about you!
+    img(src="images/pngguru.com.png" class="welcome-img" alt="cartoon racoon")
+    a(href="/users/signup" class="welcome-button") Sign Up
+  div.container.mb-5
+    div.row.mt-5
+      div.col-md
+        h2.sub-heading Talk Trash
+        p.trio-content Everyone loves talking about other people! Its always better when you can do it without the reprecussions of seeing them face to face.
+      div.col-md
+        h2.sub-heading Membership
+        p.trio-content You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
+      div.col-md
+        h2.sub-heading Membership
+        p.trio-content You are able to upgrade your membership to see who is posting and when. What good is silly fun without paywalls to seperate users and make others feel superior?
+    h1.main-heading.mt-5 Here's what some members have been saying!
+    div.post-box.mt-3
+      each post in smallPosts
+        div.post-card
+          div.post-header
+            h1.post-title.mb-2= post.title
+            h3.post-author Posted by ???? on ????
+          div.post-body
+            p.post-content= post.content
+  div.welcome-mat.mt-5
+    h1.welcome-sub-heading Become a part of something and start talkin' some trash!
+    a(href="/users/signup" class="welcome-button") Sign Up
