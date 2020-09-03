@@ -6,19 +6,37 @@ user-home
       h1.main-heading.mb-3 Most Recent Posts  
       a(href="posts/create" class="btn btn-primary") New Post
     div(class="post-box")
-      each post in posts
-        div(class="post-card")
-          div(class="post-header")
-            h2.post-title.mb-2= post.title
-            if post.author.id == currentUser.id
-              h3(class="post-author") Posted by you on #{post.niceDate}
-            else 
-              h3(class="post-author") Posted by #{post.author.name} on #{post.niceDate}
-          div(class="post-body")
-            p.post-content= post.content
-          div.post-footer
-            if post.author.id == currentUser.id
-              a(href=post.url + "/update" class="update-post") Update 
-              a(href=post.url + "/delete" class="delete-post") Delete
-              if post.updated
-                p.last-updated Last updated on #{post.niceUpdated}
+      if currentUser.isMember
+        each post in posts
+          div(class="post-card")
+            div(class="post-header")
+              h2.post-title.mb-2= post.title
+              if post.author.id == currentUser.id
+                h3(class="post-author") Posted by you on #{post.niceDate}
+              else 
+                h3(class="post-author") Posted by #{post.author.name} on #{post.niceDate}
+            div(class="post-body")
+              p.post-content= post.content
+            div.post-footer
+              if post.author.id == currentUser.id
+                a(href=post.url + "/update" class="update-post") Update 
+                a(href=post.url + "/delete" class="delete-post") Delete
+                if post.updated
+                  p.last-updated Last updated on #{post.niceUpdated}
+      else
+        each post in posts
+          div(class="post-card")
+            div(class="post-header")
+              h2.post-title.mb-2= post.title
+              if post.author.id == currentUser.id
+                h3(class="post-author") Posted by you on #{post.niceDate}
+              else 
+                h3(class="post-author") Posted by ??? on ???
+            div(class="post-body")
+              p.post-content= post.content
+            div.post-footer
+              if post.author.id == currentUser.id
+                a(href=post.url + "/update" class="update-post") Update 
+                a(href=post.url + "/delete" class="delete-post") Delete
+                if post.updated
+                  p.last-updated Last updated on #{post.niceUpdated}

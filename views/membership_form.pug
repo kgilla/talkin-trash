@@ -11,14 +11,12 @@ block content
         div.alert.alert-danger= error
       if success
         div.alert.alert-success= success
-      if currentUser.isMember == false 
-        ul
-          li You not currently a full member
-          li Enter the membership code to gain full membership
-      if currentUser.isMember == true
-        ul
-          li You are currently a full member
-          li The membership code is "Kenneth"
+      div.profile-item.form-group
+          h3.profile-item-heading Memebership Level:
+          if currentUser.isMember == true
+            h4.profile-info-item Treasure
+          else 
+            h4.profile-info-item Trash
       div(class="form-group")
         label(for="email") Membership Code
         input(type="text" name="code" class="form-control")

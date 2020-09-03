@@ -4,9 +4,9 @@
 }
 
 .post-card {
-  display: grid;
-  grid-template-rows: 1fr 1fr 3rem;
-  border: 0.1rem solid $secondary;
+  display: flex;
+  flex-direction: column;
+  border: 0.1rem solid #eee;
   border-radius: 0.5rem;
   background: #fff;
   overflow: hidden;
@@ -17,11 +17,10 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  background-color: $secondary;
 }
 
 .post-title {
-  color: #fff;
+  color: #000;
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -37,6 +36,7 @@
 }
 
 .post-footer {
+  height: 4rem;
   display: flex;
   align-items: center;
   padding-right: 1rem;

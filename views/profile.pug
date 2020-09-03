@@ -4,18 +4,28 @@ block content
   div.container.mb-5
     if success != ""
       div.alert.alert-success= success
-    div.row.mt-5
+    div.row.mt-3
       div.col-lg-5
         div.profile-container
           header.profile-header
             h2.profile-name #{currentUser.name}
           main.profile-info
-            h2.profile-info-item Email: #{currentUser.email}
-            if currentUser.isMember == true
-              h2.profile-info-item Membership: Treasure
-            else 
-              h2.profile-info-item Membership: Trash
-            h2.profile-info-item Total Posts: #{count}
+            div.profile-item
+              h3.profile-item-heading Date Joined:
+              h4.profile-info-item #{currentUser.niceDate}
+            div.profile-item
+              h3.profile-item-heading Email:
+              h4.profile-info-item #{currentUser.email}
+            div.profile-item
+              h3.profile-item-heading Memebership Level:
+              if currentUser.isMember == true
+                h4.profile-info-item Treasure
+              else 
+                h4.profile-info-item Trash
+            div.profile-item
+              h3.profile-item-heading Post:
+              h4.profile-info-item #{count}
+          footer.profile-buttons
             a(href=currentUser.url + "/update" class="btn btn-block btn-primary") Change Email/Name
             a(href=currentUser.url + "/password" class="btn btn-block btn-primary") Change Password
             a(href=currentUser.url + "/delete" class="btn btn-block btn-primary") Delete Account
@@ -34,7 +44,9 @@ block content
                 if post.updated
                   p.last-updated Last updated on #{post.niceUpdated}
       else 
-        div.no-posts
-          h2.sub-heading No Posts Yet
-          a(href="/posts/create" class="welcome-button") Create New Post
-  
+        div.profile-posts.col-lg-7
+          div.no-posts.mt-5
+            h2.sub-heading No Posts Yet
+            img(src="/bootstrap-icons/icons/emoji-frown.svg" width='30px' height='30px' alt="frown emoji")
+            a(href="/posts/create" class="btn btn-primary") Create New Post
+    

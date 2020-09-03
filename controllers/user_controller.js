@@ -366,6 +366,11 @@ exports.userDetail = async (req, res) => {
         return next(err);
       }
       const count = posts.length;
-      res.render("profile", { posts, count, success: req.flash("success") });
+      res.render("profile", {
+        posts,
+        count,
+        title: "Your Profile",
+        success: req.flash("success"),
+      });
     });
 };
