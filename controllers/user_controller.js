@@ -35,7 +35,7 @@ exports.membershipPost = [
   body("code").not().isEmpty().withMessage("You must enter a code").trim(),
   // Checks if field is correct password
   body("code")
-    .isIn([process.env.SECRET_PASSWORD, process.env.SUPER_SECRET])
+    .equals(process.env.SECRET_PASSWORD)
     .withMessage("Sorry the code is incorrect")
     .trim(),
 
@@ -51,26 +51,13 @@ exports.membershipPost = [
       });
       return;
     }
-
-    if (code === process.env.SECRET_PASSWORD) {
-      User.findByIdAndUpdate(req.params.id, { isMember: true }, {}, (err) => {
-        if (err) {
-          return next(err);
-        }
-        req.flash("success", "Your membership has been updated!");
-        res.redirect("/");
-      });
-    } else if (code === process.env.SUPER_SECRET) {
-      User.findByIdAndUpdate(req.params.id, { isAdmin: true }, {}, (err) => {
-        if (err) {
-          return next(err);
-        }
-        req.flash("success", "You are now an admin!");
-        res.redirect("/");
-      });
-    } else {
+    User.findByIdAndUpdate(req.params.id, { isMember: true }, {}, (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("success", "Your membership has been updated!");
       res.redirect("/");
-    }
+    });
   },
 ];
 
@@ -354,7 +341,20 @@ exports.userDeleteGet = (req, res) => {
   res.render("user_delete", { title: "Confirm Deletion" });
 };
 
-exports.userDeletePost = (req, res) => {};
+exports.userDeletePost = (req, res, next) => {
+  Post.deleteMany({ author: req.params.id }, (err) => {
+    if (err) {
+      return next(err);
+    }
+    User.findByIdAndDelete(req.params.id, {}, (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("success", "Account deleted successfully");
+      res.redirect("/");
+    });
+  });
+};
 
 // User Profile
 exports.userDetail = async (req, res) => {

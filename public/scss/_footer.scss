@@ -1,13 +1,21 @@
 .main-footer {
-  display: block;
-  flex-direction: column;
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   background-color: $secondary;
 }
 
 .footer-image {
-  height: 6rem;
+  height: 4rem;
   width: auto;
+}
+
+.footer-link {
+  color: $primary;
+}
+
+.footer-link:hover {
+  filter: brightness(90%);
+  color: $primary;
+  text-decoration: none;
 }

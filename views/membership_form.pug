@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div.container.h-75.center-content
+  div.container.mt-5
     form(action=currentUser.url + "/membership" method="POST")
       h1.main-heading= title
       if errors 

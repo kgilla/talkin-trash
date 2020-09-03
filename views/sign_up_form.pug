@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  div.container.center-content
-    div.row.mt-3
-      div.form-info.col-md-7.h-100
-        h2.sub-heading Connect with random strangers and talk some trash!
+  div.container.mt-5
+    div.row
+      div.form-info.col-lg-6
+        h2.main-heading.color-primary Connect with random strangers and talk some trash!
         div.info-box
           img(src="/bootstrap-icons/icons/pencil-fill.svg" class="info-icon")
           h3.heading Sign up and create an account 
@@ -14,25 +14,26 @@ block content
         div.info-box
           img(src="/bootstrap-icons/icons/chat-right-dots.svg" class="info-icon")
           h3.heading See who's been talking about you!
-      form(action="/users/signup" method="POST" class="signup-form col-md-5")
-        h2(class="title")= title
-        if errors 
-          each error in errors
-            div.alert.alert-danger= error.msg 
-        div(class="form-group")
-          label(for="firstName") First Name
-          input(class="form-control" type="text" name="first_name" required="true" value= first_name ? first_name : "")
-        div(class="form-group")
-          label(for="lastName") Last Name
-          input(class="form-control" type="text" name="last_name" required="true" value= last_name ? last_name : "")
-        div(class="form-group")
-          label(for="email") Email
-          input(class="form-control" type="text" name="email" placeholder="Email@example.com" required="true" value= email ? email : "")
-        div(class="form-group")
-          label(for="password") Password
-          input(class="form-control" type="text" name="password" placeholder="Password must be at least 6 characters" required="true")
-        div(class="form-group")
-          label(for="password2") Confirm Password
-          input(class="form-control" type="text" name="password2" placeholder="Confirm Password" required="true")
-        div(class="form-group")  
-          button(type="submit" class="btn btn-primary btn-block") Sign Up!
+      div.container.col-lg-6
+        form(action="/users/signup" method="POST" class="signup-form ")
+          h1.main-heading Sign Up 
+          if errors 
+            each error in errors
+              div.alert.alert-danger= error.msg 
+          div(class="form-group")
+            label(for="firstName") First Name
+            input(class="form-control" type="text" name="first_name" required="true" value= first_name ? first_name : "")
+          div(class="form-group")
+            label(for="lastName") Last Name
+            input(class="form-control" type="text" name="last_name" required="true" value= last_name ? last_name : "")
+          div(class="form-group")
+            label(for="email") Email
+            input(class="form-control" type="text" name="email" placeholder="Email@example.com" required="true" value= email ? email : "")
+          div(class="form-group")
+            label(for="password") Password
+            input(class="form-control" type="text" name="password" placeholder="Password must be at least 6 characters" required="true")
+          div(class="form-group")
+            label(for="password2") Confirm Password
+            input(class="form-control" type="text" name="password2" placeholder="Confirm Password" required="true")
+          div(class="form-group")  
+            button(type="submit" class="btn btn-primary btn-block") Sign Up!

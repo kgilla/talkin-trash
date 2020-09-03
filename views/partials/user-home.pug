@@ -18,8 +18,8 @@ div.container.mt-3.mb-5
               h3(class="post-author") Posted by ??? on ???
         div(class="post-body")
           p.post-content= post.content
-        div.post-footer
-          if post.author.id == currentUser.id
+        if post.author.id == currentUser.id
+          div.post-footer
             a(href=post.url + "/update" class="update-post") Update 
             a(href=post.url + "/delete" class="delete-post") Delete
             if post.updated

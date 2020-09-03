@@ -111,7 +111,7 @@ exports.deleteGet = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  Post.findByIdAndDelete(req.params.id, {}, (err, success) => {
+  Post.findByIdAndDelete(req.params.id, {}, (err) => {
     if (err) {
       return next(err);
     }
