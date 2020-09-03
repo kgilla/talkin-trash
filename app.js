@@ -6,12 +6,16 @@ const logger = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const redis = require("redis");
 
 // Env config
 require("dotenv").config();
 
 // Passport Config
 require("./config/passport")(passport);
+
+let RedisStore = require("connect-redis")(session);
+let redisClient = redis.createClient();
 
 var app = express();
 
@@ -34,9 +38,9 @@ app.set("view engine", "pug");
 // Sessions
 app.use(
   session({
+    store: new RedisStore({ client: redisClient }),
     secret: "secret",
     resave: false,
-    saveUninitialized: true,
   })
 );
 
