@@ -1,4 +1,15 @@
-/* welcome mat / new user greeting */
+// .home-box {
+//   height: 100%;
+//   display: grid;
+//   margin-top: 2rem;
+//   margin-bottom: 2rem;
+// }
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .welcome-mat {
   display: flex;

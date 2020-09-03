@@ -5,9 +5,9 @@ block content
     form(action="" method="POST" class="login-form")
       h1.title= title
       if error != ""
-        p.error= error
+        div.alert.alert-danger= error
       if success != ""
-        p.success= success
+        div.alert.alert-success= success
       div.form-group
         label(for="email") Email
         input(type="text" name="email" class="form-control")

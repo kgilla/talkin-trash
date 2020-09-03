@@ -6,8 +6,10 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   firstName: { type: String, required: true, min: 1, max: 60 },
   lastName: { type: String, required: true, min: 1, max: 60 },
+  dateJoined: { type: Date, default: new Date() },
   isMember: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
+  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
 });
 
 userSchema.virtual("url").get(function () {

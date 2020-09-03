@@ -12,6 +12,7 @@ html {
 
 body {
   height: 100%;
+  min-height: 100vh;
   font-family: "Roboto", sans-serif;
   background: #f4f4f4;
   color: #222;
@@ -37,21 +38,6 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
-}
-
-/* Footer */
-
-.main-footer {
-  width: 100%;
-  padding: 0.5rem;
-  border-top: 0.1rem solid #aaa;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.main-footer .nav-link {
-  color: #666;
 }
 
 @media (max-width: 599px) {

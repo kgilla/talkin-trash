@@ -1,0 +1,18 @@
+.main-footer {
+  justify-self: flex-end;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  background-color: $secondary;
+}
+
+.footer-image {
+  height: 10rem;
+  width: auto;
+}
+
+.footer-links {
+  text-align: center;
+}

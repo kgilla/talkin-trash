@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  div.container
+  div.container.mb-5
     if success != ""
-      h2.success= success
+      div.alert.alert-success= success
     div.row.mt-5
       div.col-lg-5
         div.profile-container
@@ -16,8 +16,9 @@ block content
             else 
               h2.profile-info-item Membership: Trash
             h2.profile-info-item Total Posts: #{count}
-            a(href=currentUser.url + "/update" class="profile-info-button") Change Email/Name
-            a(href=currentUser.url + "/password" class="profile-info-button") Change Password
+            a(href=currentUser.url + "/update" class="btn btn-block btn-primary") Change Email/Name
+            a(href=currentUser.url + "/password" class="btn btn-block btn-primary") Change Password
+            a(href=currentUser.url + "/delete" class="btn btn-block btn-primary") Delete Account
       if posts != ""
         div.profile-posts.col-lg-7
           each post in posts
@@ -32,7 +33,6 @@ block content
                 a(href=post.url + "/delete" class="delete-post") Delete
                 if post.updated
                   p.last-updated Last updated on #{post.niceUpdated}
-        a(href="/posts/create" class="new-post") New Post +
       else 
         div.no-posts
           h2.sub-heading No Posts Yet

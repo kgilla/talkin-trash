@@ -39,15 +39,19 @@ a:hover {
 /* Sign up form */
 
 .form-info {
+  height: 50%;
   display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  justify-items: center;
   gap: 1rem;
-  padding: 3rem;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .info-box {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .info-box * {

@@ -2,12 +2,7 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.createGet = (req, res) => {
-  if (req.user) {
-    res.render("post_form", { heading: "Create Post" });
-  } else {
-    req.flash("error", "Please Log In");
-    res.redirect("/users/login");
-  }
+  res.render("post_form", { heading: "Create Post" });
 };
 
 exports.createPost = [
@@ -107,30 +102,31 @@ exports.updatePost = [
 ];
 
 exports.deleteGet = (req, res, next) => {
-  if (req.user) {
-    Post.findById(req.params.id).exec((err, post) => {
-      if (err) {
-        return next(err);
-      }
-      res.render("post_delete_form", { post });
-    });
-  } else {
-    req.flash("error", "Please Log In");
-    res.redirect("/users/login");
-  }
+  Post.findById(req.params.id).exec((err, post) => {
+    if (err) {
+      return next(err);
+    }
+    res.render("post_delete_form", { post });
+  });
 };
 
 exports.deletePost = (req, res, next) => {
-  if (req.user) {
-    Post.findByIdAndDelete(req.params.id, {}, (err, success) => {
+  Post.findByIdAndDelete(req.params.id, {}, (err, success) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "Post deleted successfully!");
+    res.redirect("/");
+  });
+};
+
+exports.readGet = (req, res, next) => {
+  Post.findById(req.params.id)
+    .populate("author")
+    .exec((err, post) => {
       if (err) {
         return next(err);
       }
-      req.flash("success", "Post deleted successfully!");
-      res.redirect(req.user.url);
+      res.render("post", { title: "Post", post });
     });
-  } else {
-    req.flash("error", "Please Log In");
-    res.redirect("/users/login");
-  }
 };

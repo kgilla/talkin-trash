@@ -27,12 +27,7 @@ exports.logout = (req, res) => {
 
 // Membership functions
 exports.membershipGet = (req, res) => {
-  if (req.user) {
-    res.render("membership_form", { title: "Membership" });
-  } else {
-    req.flash("error", "You must be logged in to access that");
-    res.redirect("/users/login");
-  }
+  res.render("membership_form", { title: "Membership" });
 };
 
 exports.membershipPost = [
@@ -40,12 +35,12 @@ exports.membershipPost = [
   body("code").not().isEmpty().withMessage("You must enter a code").trim(),
   // Checks if field is correct password
   body("code")
-    .equals(process.env.SECRET_PASSWORD)
+    .isIn([process.env.SECRET_PASSWORD, process.env.SUPER_SECRET])
     .withMessage("Sorry the code is incorrect")
     .trim(),
 
   (req, res, next) => {
-    const code = req.body;
+    const code = req.body.code;
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -57,13 +52,25 @@ exports.membershipPost = [
       return;
     }
 
-    User.findByIdAndUpdate(req.params.id, { isMember: true }, {}, (err) => {
-      if (err) {
-        return next(err);
-      }
-      req.flash("success", "Your membership has been updated!");
+    if (code === process.env.SECRET_PASSWORD) {
+      User.findByIdAndUpdate(req.params.id, { isMember: true }, {}, (err) => {
+        if (err) {
+          return next(err);
+        }
+        req.flash("success", "Your membership has been updated!");
+        res.redirect("/");
+      });
+    } else if (code === process.env.SUPER_SECRET) {
+      User.findByIdAndUpdate(req.params.id, { isAdmin: true }, {}, (err) => {
+        if (err) {
+          return next(err);
+        }
+        req.flash("success", "You are now an admin!");
+        res.redirect("/");
+      });
+    } else {
       res.redirect("/");
-    });
+    }
   },
 ];
 
@@ -160,17 +167,12 @@ exports.signupPost = [
 
 // Update Functions
 exports.updateGet = (req, res, next) => {
-  if (req.user) {
-    User.findById(req.params.id).exec((err, user) => {
-      if (err) {
-        return next(err);
-      }
-      res.render("info_change_form", { user });
-    });
-  } else {
-    req.flash("error", "Please log in");
-    res.redirect("/users/login");
-  }
+  User.findById(req.params.id).exec((err, user) => {
+    if (err) {
+      return next(err);
+    }
+    res.render("info_change_form", { user });
+  });
 };
 
 exports.updatePost = [
@@ -267,13 +269,9 @@ exports.updatePost = [
 ];
 
 exports.passwordGet = (req, res) => {
-  if (req.user) {
-    res.render("password_change_form");
-  } else {
-    req.flash("error", "Please log in");
-    res.redirect("/users/login");
-  }
+  res.render("password_change_form");
 };
+
 exports.passwordPost = [
   // checks old password
   body("old_password")
@@ -352,23 +350,22 @@ exports.passwordPost = [
 ];
 
 // Delete Functions
-exports.userDeleteGet = (req, res) => {};
-exports.userDeleteGet = (req, res) => {};
+exports.userDeleteGet = (req, res) => {
+  res.render("user_delete", { title: "Confirm Deletion" });
+};
+
+exports.userDeletePost = (req, res) => {};
 
 // User Profile
 exports.userDetail = async (req, res) => {
-  if (req.user) {
-    Post.find({ author: req.user.id })
-      .populate("author")
-      .exec((err, posts) => {
-        if (err) {
-          return next(err);
-        }
-        const count = posts.length;
-        res.render("profile", { posts, count, success: req.flash("success") });
-      });
-  } else {
-    req.flash("error", "You must sign in to view that");
-    res.redirect("/users/login");
-  }
+  await Post.find({ author: req.user.id })
+    .sort({ date: -1 })
+    .populate("author")
+    .exec((err, posts) => {
+      if (err) {
+        return next(err);
+      }
+      const count = posts.length;
+      res.render("profile", { posts, count, success: req.flash("success") });
+    });
 };

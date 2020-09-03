@@ -33,25 +33,10 @@
   padding: 0.5rem;
 }
 
-.profile-info-button {
-  text-align: center;
-  width: 100%;
-  margin: 1rem auto;
-  padding: 0.5rem;
-  border: 0.1rem solid #ccc;
-  border-radius: 0.5rem;
-  background: #ddd;
-  color: #000;
-  text-decoration: none;
-}
-
-.profile-info-button:hover {
-  filter: brightness(80%);
-}
-
 .profile-posts {
   width: 100%;
   display: grid;
+  align-content: flex-start;
   gap: 2rem;
 }
 

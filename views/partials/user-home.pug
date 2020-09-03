@@ -1,8 +1,10 @@
 user-home 
   if success != ""
-    h2.success= success
-  div.container.mt-5.mb-5
-    h1.main-heading.mb-3 Most Recent Posts  
+    div.alert.alert-success= success
+  div.container.h-75.mt-3.mb-5
+    header.home-header
+      h1.main-heading.mb-3 Most Recent Posts  
+      a(href="posts/create" class="btn btn-primary") New Post
     div(class="post-box")
       each post in posts
         div(class="post-card")
@@ -20,4 +22,3 @@ user-home
               a(href=post.url + "/delete" class="delete-post") Delete
               if post.updated
                 p.last-updated Last updated on #{post.niceUpdated}
-      a(href="posts/create" class="new-post") New Post +
