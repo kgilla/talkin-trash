@@ -1,20 +1,20 @@
 extends layout
 
 block content
-  div.container
+  div.container.center-content
     div.row.mt-3
-      div.form-info.col-md-6
-        h2.main-heading Connect with random strangers and talk some trash!
+      div.form-info.col-md-7.h-100
+        h2.sub-heading Connect with random strangers and talk some trash!
         div.info-box
           img(src="/bootstrap-icons/icons/pencil-fill.svg" class="info-icon")
-          h3.sub-heading Sign up and create an account 
+          h3.heading Sign up and create an account 
         div.info-box
           img(src="/bootstrap-icons/icons/calendar2-check.svg" class="info-icon")
-          h3.sub-heading Apply for membership
+          h3.heading Apply for membership
         div.info-box
           img(src="/bootstrap-icons/icons/chat-right-dots.svg" class="info-icon")
-          h3.sub-heading See who's been talking about you!
-      form(action="/users/signup" method="POST" class="signup-form col-md-6")
+          h3.heading See who's been talking about you!
+      form(action="/users/signup" method="POST" class="signup-form col-md-5")
         h2(class="title")= title
         if errors 
           each error in errors
