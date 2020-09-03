@@ -358,7 +358,7 @@ exports.userDeletePost = (req, res, next) => {
 
 // User Profile
 exports.userDetail = (req, res) => {
-  await Post.find({ author: req.user.id })
+  Post.find({ author: req.user.id })
     .sort({ date: -1 })
     .populate("author")
     .exec((err, posts) => {

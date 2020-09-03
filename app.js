@@ -41,6 +41,7 @@ app.use(
     store: new RedisStore({ client: redisClient }),
     secret: "secret",
     resave: false,
+    saveUninitialized: true,
   })
 );
 
