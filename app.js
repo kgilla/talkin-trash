@@ -6,6 +6,7 @@ const logger = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const helmet = require("helmet");
 
 // Env config
 require("dotenv").config();
@@ -22,7 +23,7 @@ const userRouter = require("./routes/users");
 
 // Mongoose DB
 var mongoose = require("mongoose");
-var mongoDB = process.env.DB_URL;
+var mongoDB = process.env.MONGO_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -68,6 +69,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "node_modules")));
+app.use(helmet());
 app.use("/", indexRouter);
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
