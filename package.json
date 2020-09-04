@@ -11,6 +11,7 @@
     "bootstrap-icons": "^1.0.0",
     "clean-css": "^4.2.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "connect-redis": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -28,7 +29,6 @@
     "passport-local": "^1.0.0",
     "popper.js": "^1.16.1",
     "pug": "^3.0.0",
-    "redis": "^3.0.2",
     "sass": "^1.26.10"
   }
 }

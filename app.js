@@ -6,16 +6,12 @@ const logger = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
-const redis = require("redis");
 
 // Env config
 require("dotenv").config();
 
 // Passport Config
 require("./config/passport")(passport);
-
-let RedisStore = require("connect-redis")(session);
-let redisClient = redis.createClient();
 
 var app = express();
 
@@ -31,6 +27,16 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+// Set up mongostore
+const MongoStore = require("connect-mongo")(session);
+const connection = mongoose.createConnection(process.env.DB_URL, {
+  useNewUrlParser: true,
+});
+const sessionStore = new MongoStore({
+  mongooseConnection: connection,
+  collection: "sessions",
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -38,7 +44,7 @@ app.set("view engine", "pug");
 // Sessions
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
+    store: sessionStore,
     secret: "secret",
     resave: false,
     saveUninitialized: true,
