@@ -24,14 +24,18 @@ const userRouter = require("./routes/users");
 // Mongoose DB
 var mongoose = require("mongoose");
 var mongoDB = process.env.MONGO_URI;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoDB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Set up mongostore
 const MongoStore = require("connect-mongo")(session);
-const connection = mongoose.createConnection(process.env.DB_URL, {
+const connection = mongoose.createConnection(process.env.MONGO_URI, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
