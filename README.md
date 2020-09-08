@@ -2,7 +2,7 @@
 
 Talkin' Trash is a website made based on the Node.JS curriculum of [The Odin Project](https://www.theodinproject.com/home). This website was made to further my understanding of creating a back-end with express and also to introduce authentication with the help of Passport.JS.
 
-[Live Demo](https://vast-headland-84585.herokuapp.com/)
+[Live Demo](https://vast-headland-84585.herokuapp.com)
 
 ## Learning Objectives
 
@@ -13,7 +13,7 @@ Talkin' Trash is a website made based on the Node.JS curriculum of [The Odin Pro
 - Use [Sass](https://sass-lang.com/) to partition stylesheets based on components
 - Make a website more responsive to various viewports
 - Improve my overall design ideas and layout structuring
-- Makie my code more modular and partitioned overall
+- Make my code more modular and partitioned overall
 
 ## Features
 

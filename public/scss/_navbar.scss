@@ -42,9 +42,14 @@
 
 .nav-link:hover {
   color: $primary;
+  text-decoration: none;
 }
 
 .main-title:hover {
   color: #fff;
+  text-decoration: none;
+}
+
+.left-links:hover {
   text-decoration: none;
 }
