@@ -21,13 +21,10 @@ Talkin' Trash utilizes conditional rendering to show or hide user information ba
 
 ## Images
 
-### Home Page
-
 <img src="./public/images/screenshots/home.png">
-
-### Example Of Posts
-
 <img src="./public/images/screenshots/posts.png">
+<img src="public/images/screenshots/Screen Shot 2020-10-16 at 2.21.06 AM.png">
+<img src="public/images/screenshots/Screen Shot 2020-10-16 at 2.21.31 AM.png">
 
 ## License
 
